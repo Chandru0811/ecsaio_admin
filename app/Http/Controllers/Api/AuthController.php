@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use App\Traits\ApiResponses;
 
 class AuthController extends Controller
 {
+    use ApiResponses;
+
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
