@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\admin\EmployeeAndAttendanceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -17,7 +18,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::middleware('role:1')->prefix('admin')->group(function () {
-
+        Route::get('employees', [EmployeeAndAttendanceController::class, 'getEmpDetails']);
+        Route::post('employees/attendance', [EmployeeAndAttendanceController::class, 'getEmpAttendanceByDate']);
     });
 
     Route::middleware('role:2')->prefix('emp')->group(function () {
