@@ -18,8 +18,14 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::middleware('role:1')->prefix('admin')->group(function () {
+        //Employees
         Route::get('allEmps', [EmployeeAndAttendanceController::class, 'getEmpDetails']);
-        Route::post('allEmpAttendance', [EmployeeAndAttendanceController::class, 'getEmpAttendanceByDate']);
+        Route::post('emp/register', [EmployeeAndAttendanceController::class, 'empRegister']);
+        Route::get('emp/{id}', [EmployeeAndAttendanceController::class, 'getByIdEmpDetails']);
+        Route::put('emp/update/{id}', [EmployeeAndAttendanceController::class, 'updateEmpDetails']);
+        Route::delete('emp/delete/{id}', [EmployeeAndAttendanceController::class, 'destroyEmpDetails']);
+
+        Route::get('allEmpAttendance', [EmployeeAndAttendanceController::class, 'getEmpAttendanceByDate']);
     });
 
     Route::middleware('role:2')->prefix('emp')->group(function () {
